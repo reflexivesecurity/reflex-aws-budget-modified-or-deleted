@@ -1,10 +1,26 @@
 module "reflex_aws_budget_modified_or_deleted" {
   source           = "git::https://github.com/cloudmitigator/reflex-engine.git//modules/cwe_lambda?ref=v0.5.4"
   rule_name        = "BudgetModifiedOrDeleted"
-  rule_description = "TODO: Provide rule description"
+  rule_description = "A Reflex Rule for detecting the modification or deletion of an AWS Budget"
 
   event_pattern = <<PATTERN
-# TODO: Provide event pattern
+{
+  "source": [
+    "aws.budgets"
+  ],
+  "detail-type": [
+    "AWS API Call via CloudTrail"
+  ],
+  "detail": {
+    "eventSource": [
+      "budgets.amazonaws.com"
+    ],
+    "eventName": [
+      "UpdateBudget",
+      "DeleteBudget"
+    ]
+  }
+}
 PATTERN
 
   function_name   = "BudgetModifiedOrDeleted"
@@ -13,13 +29,7 @@ PATTERN
   lambda_runtime  = "python3.7"
   environment_variable_map = {
     SNS_TOPIC = var.sns_topic_arn,
-    
   }
-  custom_lambda_policy = <<EOF
-# TODO: Provide required lambda permissions policy
-EOF
-
-
 
   queue_name    = "BudgetModifiedOrDeleted"
   delay_seconds = 0

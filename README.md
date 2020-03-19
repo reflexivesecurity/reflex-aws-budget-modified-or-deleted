@@ -1,5 +1,5 @@
 # reflex-aws-budget-modified-or-deleted
-TODO: Write a brief description of your rule and what it does.
+A Reflex Rule for detecting the modification or deletion of an AWS Budget.
 
 ## Usage
 To use this rule either add it to your `reflex.yaml` configuration file:  
