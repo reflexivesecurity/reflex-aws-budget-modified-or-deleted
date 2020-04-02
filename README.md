@@ -18,7 +18,7 @@ rules:
 or add it directly to your Terraform:  
 ```
 module "budget-modified-or-deleted" {
-  source            = "git::https://github.com/cloudmitigator/reflex-aws-budget-modified-or-deleted.git?ref=v0.1.0"
+  source            = "git::https://github.com/cloudmitigator/reflex-aws-budget-modified-or-deleted.git?ref=latest"
   sns_topic_arn     = module.central-sns-topic.arn
   reflex_kms_key_id = module.reflex-kms-key.key_id
 }
