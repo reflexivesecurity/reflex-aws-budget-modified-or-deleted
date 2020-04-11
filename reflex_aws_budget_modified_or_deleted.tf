@@ -1,5 +1,5 @@
 module "reflex_aws_budget_modified_or_deleted" {
-  source           = "git::https://github.com/cloudmitigator/reflex-engine.git//modules/cwe_lambda?ref=v0.5.4"
+  source           = "git::https://github.com/cloudmitigator/reflex-engine.git//modules/cwe_lambda?ref=v0.5.7"
   rule_name        = "BudgetModifiedOrDeleted"
   rule_description = "A Reflex Rule for detecting the modification or deletion of an AWS Budget"
 
