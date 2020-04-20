@@ -1,9 +1,7 @@
 """ Module for BudgetModifiedOrDeleted """
 
 import json
-import os
 
-import boto3
 from reflex_core import AWSRule
 
 
