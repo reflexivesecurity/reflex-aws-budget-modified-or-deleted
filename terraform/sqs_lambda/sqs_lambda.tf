@@ -1,6 +1,6 @@
 module "sqs_lambda" {
   function_name   = "BudgetModifiedOrDeleted"
-  source_code_dir = "${path.module}/source"
+  source_code_dir = "${path.module}/../../source"
   handler         = "reflex_aws_budget_modified_or_deleted.lambda_handler"
   lambda_runtime  = "python3.7"
   environment_variable_map = {
