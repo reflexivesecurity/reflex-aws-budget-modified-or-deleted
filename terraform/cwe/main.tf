@@ -1,7 +1,7 @@
 module "cwe" {
   source           = "git::https://github.com/cloudmitigator/reflex-engine.git//modules/cwe_lambda?ref=v0.6.0"
-  rule_name        = "BudgetModifiedOrDeleted"
-  rule_description = "A Reflex Rule for detecting the modification or deletion of an AWS Budget"
+  name        = "BudgetModifiedOrDeleted"
+  description = "A Reflex Rule for detecting the modification or deletion of an AWS Budget"
 
   event_pattern = <<PATTERN
 {
