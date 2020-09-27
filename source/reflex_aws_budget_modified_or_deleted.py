@@ -2,7 +2,7 @@
 
 import json
 
-from reflex_core import AWSRule
+from reflex_core import AWSRule, subscription_confirmation
 
 
 class BudgetModifiedOrDeleted(AWSRule):
@@ -17,7 +17,9 @@ class BudgetModifiedOrDeleted(AWSRule):
 
         if self.event_name == "UpdateBudget":
             self.event_type = "updated"
-            self.budget_name = event["detail"]["requestParameters"]["newBudget"]["budgetName"]
+            self.budget_name = event["detail"]["requestParameters"]["newBudget"][
+                "budgetName"
+            ]
         else:  # self.event_name == "DeleteBudget"
             self.event_type = "deleted"
             self.budget_name = event["detail"]["requestParameters"]["budgetName"]
@@ -40,5 +42,10 @@ class BudgetModifiedOrDeleted(AWSRule):
 
 def lambda_handler(event, _):
     """ Handles the incoming event """
-    rule = BudgetModifiedOrDeleted(json.loads(event["Records"][0]["body"]))
+    print(event)
+    event_payload = json.loads(event["Records"][0]["body"])
+    if subscription_confirmation.is_subscription_confirmation(event_payload):
+        subscription_confirmation.confirm_subscription(event_payload)
+        return
+    rule = BudgetModifiedOrDeleted(event_payload)
     rule.run_compliance_rule()
